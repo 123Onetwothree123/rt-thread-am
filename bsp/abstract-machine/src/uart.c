@@ -50,7 +50,8 @@ static int _uart_getc(struct rt_serial_device *serial)
       "am_microbench\n"
       "utest_list\n";
       */
-     static const char *p = "help\nam_hello\nam_microbench\nutest_list\n";
+  // 默认会启动的程序
+  static const char *p = "help\nam_hello\nam_microbench\nutest_list\n";
   return (*p != '\0' ? *(p++) : -1);
 }
 
