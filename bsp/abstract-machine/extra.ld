@@ -27,7 +27,11 @@ SECTIONS {
     *(__am_apps.sdata*)
     __am_apps_data_end = .;
     . = ALIGN(8);
-  }
+  } > sdram AT> flash_xip
+
+  _data_extra_lma = LOADADDR(.data.extra);
+  _data_extra_start = ADDR(.data.extra);
+  _data_extra_end = _data_extra_start + SIZEOF(.data.extra);
 }
 INSERT BEFORE .data;
 

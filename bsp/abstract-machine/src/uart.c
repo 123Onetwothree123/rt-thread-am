@@ -11,6 +11,7 @@
 #include <rtthread.h>
 #include <am.h>
 #include <klib.h>
+#include <klib-macros.h>
 
 #define UART_DEFAULT_BAUDRATE 115200
 
@@ -42,17 +43,8 @@ static int _uart_putc(struct rt_serial_device *serial, char c)
 
 static int _uart_getc(struct rt_serial_device *serial)
 {
-  // static const char *p = "help\ndate\nversion\nfree\nps\npwd\nls\nmemtrace\nmemcheck\nutest_list\n";
-  /*
-  static const char *p =
-      "help\n"
-      "am_hello\n"
-      "am_microbench\n"
-      "utest_list\n";
-      */
-  // 默认会启动的程序
-  static const char *p = "help\nam_hello\nam_microbench\nutest_list\n";
-  return (*p != '\0' ? *(p++) : -1);
+    char Ch = io_read(AM_UART_RX).data;
+    return (Ch != (char)-1) ? Ch : -1;
 }
 
 const struct rt_uart_ops _uart_ops = {
